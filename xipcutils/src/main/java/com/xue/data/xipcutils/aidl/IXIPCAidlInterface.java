@@ -4,6 +4,8 @@
 package com.xue.data.xipcutils.aidl;
 // Declare any non-default types here with import statements
 
+import android.util.Log;
+
 public interface IXIPCAidlInterface extends android.os.IInterface
 {
   /** Default implementation for IXIPCAidlInterface. */
@@ -67,6 +69,7 @@ public interface IXIPCAidlInterface extends android.os.IInterface
             _arg0 = null;
           }
           Response _result = this.send(_arg0);
+          Log.e("TAG:===1", System.currentTimeMillis() + "result ==="+_result.getData());
           reply.writeNoException();
           if ((_result!=null)) {
             reply.writeInt(1);
@@ -75,6 +78,7 @@ public interface IXIPCAidlInterface extends android.os.IInterface
           else {
             reply.writeInt(0);
           }
+          Log.e("TAG:===2",System.currentTimeMillis()+"");
           return true;
         }
         default:
@@ -113,12 +117,16 @@ public interface IXIPCAidlInterface extends android.os.IInterface
             _data.writeInt(0);
           }
           boolean _status = mRemote.transact(Stub.TRANSACTION_send, _data, _reply, 0);
+          Log.e("TAG:===3",System.currentTimeMillis()+"");
           if (!_status && getDefaultImpl() != null) {
             return getDefaultImpl().send(request);
           }
           _reply.readException();
+
           if ((0!=_reply.readInt())) {
             _result = Response.CREATOR.createFromParcel(_reply);
+            Log.e("TAG:===4",System.currentTimeMillis()+""+_result.getData());
+
           }
           else {
             _result = null;
