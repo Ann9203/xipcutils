@@ -1,0 +1,3 @@
+rootProject.name = "XIPCUtils"
+include ':app'
+include ':xipcutils'
